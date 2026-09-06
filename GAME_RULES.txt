@@ -153,11 +153,23 @@ Sequence-IQ/
 │   ├── panels/
 │   └── mock-screens/
 ├── ios/
-│   └── Puzzles.txt
+│   ├── View/
+│   ├── Controller/
+│   ├── Model/
+│   ├── Helper/
+│   └── Assets/
 ├── android/
-│   └── Puzzles.txt
+│   ├── View/
+│   ├── Controller/
+│   ├── Model/
+│   ├── Helper/
+│   └── Assets/
 └── web/
-    └── Puzzles.txt
+    ├── View/
+    ├── Controller/
+    ├── Model/
+    ├── Helper/
+    └── Assets/
 ```
 
 ## 18. Change Management
@@ -225,10 +237,78 @@ Required flow:
 - Next Level opens the next unlocked Main Game directly.
 - A level cannot be skipped to bypass completion-based unlocking.
 - Back/Home returns to the correct parent without hidden screens stacking.
-- Only one primary screen may be active/visible at a time.
+- Only one primary screen may be active/visible at one time.
 
 ## 26. V2 Bug-Fix Rule
 
 V2 is a stabilization phase. Check major and minor issues including screen stacking/overflow, wrong navigation, invalid unlocks, repeated completion, incorrect lives reset, wrong-answer handling, hint-state errors, puzzle loading, persistence, broken controls, stale UI state and responsive layout problems.
 
 Do not claim a platform is fully runnable/buildable unless its actual project/build target has been verified.
+
+## 27. Project Architecture Rule — MVVM-Style Separation
+
+All Sequence IQ platform implementations must follow a clean architecture that is conceptually similar to iOS MVVM while remaining independently implemented on each platform.
+
+Each platform must organize application code into these responsibilities:
+
+### View
+
+The `View` folder contains all UI/view files related to the application screens. Views are responsible for presentation and user interaction wiring, not business/data logic.
+
+### Controller
+
+The `Controller` folder contains view-handling/control logic. Controllers coordinate navigation and user actions and are connected to the Model/state for the reactive screen they manage. Controllers must not duplicate model data unnecessarily.
+
+### Model
+
+The `Model` folder contains all data models and application state/data structures used by the platform implementation.
+
+### Helper
+
+The `Helper` folder contains reusable helper functions, utilities and common non-UI functionality that can be safely reused within that platform.
+
+### Assets
+
+The platform `Assets` folder contains application-specific assets/resources used by that platform. Shared visual source assets remain organized under the repository-level `assets/` directory; platform-specific copies/conversions may be placed in the platform `Assets` folder when required by the native framework.
+
+### Screen Separation
+
+The 12 approved application screens must be designed and implemented as separate screens/views, with their related UI in `View`, screen handling/navigation in `Controller`, state/data in `Model`, reusable functions in `Helper`, and required resources in `Assets`.
+
+The 12 screens are:
+1. Splash Screen
+2. Home Screen
+3. Difficulty Select
+4. Level Map (Easy)
+5. Gameplay Screen
+6. Level Complete
+7. Game Over
+8. Settings
+9. Shop
+10. Achievements
+11. Stats
+12. Coming Soon
+
+Do not build all screens as one oversized view/controller file. Each screen should have clear separation of responsibility while shared/reusable components may be extracted into appropriate shared View, Controller, Model or Helper files.
+
+This architecture rule applies to all current and future Sequence IQ implementations on iOS, Android and Web. The exact framework/language may differ by platform, but the architectural responsibilities must remain equivalent.
+
+## 28. Architecture Rule for Future Projects
+
+For the owner's future application projects, use the same four-layer project organization by default unless the owner explicitly approves another architecture:
+
+- `View` — all UI/view presentation
+- `Controller` — screen/view handling, navigation and coordination with reactive model/state
+- `Model` — models and application state/data
+- `Helper` — reusable helper functions/utilities
+- `Assets` — application assets/resources
+
+This is an MVVM-style separation adapted to the project's platform/framework. It is a default architecture convention and must be applied consistently across the project's implementations unless explicitly changed by the owner.
+
+## 29. V2 12-Screen Design Rule
+
+V2 work must treat each of the 12 screens as an independently designed screen. Do not rely on accidental visibility of another screen, stacked page content, or one giant scrolling page to represent multiple screens.
+
+Each screen must have its own layout, UI hierarchy, navigation entry/exit behavior, and required state handling. Shared visual components may be reused, but screen-specific composition remains separate.
+
+Before a screen is marked complete, verify its standalone appearance and its transitions to/from every directly connected screen according to the V2 navigation flow.
