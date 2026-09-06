@@ -1,0 +1,1 @@
+export const LevelMapView = () => `<section id="levelsScreen" class="screen map-screen"><div class="screen-top"><button data-action="difficulty" class="back-btn">‹</button><div><span class="eyebrow">LEVEL MAP</span><h2 id="mapTitle">Easy Levels</h2></div><div class="hint-pill">💡 <span id="mapHints">3</span></div></div><div id="levelMap" class="level-map"></div></section>`;
