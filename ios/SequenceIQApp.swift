@@ -6,15 +6,15 @@ enum Difficulty:String,CaseIterable { case easy="Easy",hard="Hard",master="Maste
 enum Screen { case splash,home,levels,game,complete,gameOver }
 final class GameModel:ObservableObject {
  @Published var difficulty:Difficulty = .easy; @Published var level=1; @Published var lives=3; @Published var hints=3; @Published var completed:Set<String>=[]; @Published var hintStage=0; @Published var screen:Screen = .splash; @Published var message=""
- init(){if let d=UserDefaults.standard.data(forKey:"completed"),let s=try? JSONDecoder().decode(Set<String>.self,from:d){completed=s};let h=UserDefaults.standard.object(forKey:"hints") as? Int;if let h,h>0{hints=h}}
+ init(){if let d=UserDefaults.standard.data(forKey:"completed"),let s=try? JSONDecoder().decode(Set<String>.self,from:d){completed=s};if let h=UserDefaults.standard.object(forKey:"hints") as? Int,h>=0{hints=h}}
  func save(){if let d=try? JSONEncoder().encode(completed){UserDefaults.standard.set(d,forKey:"completed")};UserDefaults.standard.set(hints,forKey:"hints")}
  func open(_ d:Difficulty)->Bool{d == .easy || (d == .hard && completed.filter{$0.hasPrefix("Easy-")}.count>=20) || (d == .master && completed.filter{$0.hasPrefix("Hard-")}.count>=20)}
- func canPlay(_ d:Difficulty,_ l:Int)->Bool{open(d)&&l>=1&&l<=20&&(l==1||completed.contains("\(d.rawValue)-\(l-1)")||completed.contains("\(d.rawValue)-\(l)"))}
+ func canPlay(_ d:Difficulty,_ l:Int)->Bool{open(d)&&l>=1&&l<=20&&(l==1||completed.contains("\(d.rawValue)-\(l-1)"))}
  func start(_ d:Difficulty,_ l:Int){guard canPlay(d,l) else{return};difficulty=d;level=l;lives=3;hintStage=0;message="";screen = .game}
  func puzzle()->Puzzle{let a=level+1;switch difficulty{case .easy:return Puzzle(sequence:[a,a+2,a+4,a+6,nil,a+10],answer:a+8,options:[a+8,a+12,a+4,a+14]);case .hard:return Puzzle(sequence:[a,a*2,a*4,a*8,nil,a*32],answer:a*16,options:[a*16,a*12,a*24,a*32]);case .master:return Puzzle(sequence:[a,a+3,a+8,a+15,nil,a+35],answer:a+24,options:[a+24,a+31,a+21,a+36])}}
- func answer(_ n:Int){guard screen == .game else{return};if n==puzzle().answer{completed.insert("\(difficulty.rawValue)-\(level)");save();screen = .complete}else{lives-=1;message=lives==0 ? "Game Over" : "Try again.";if lives==0{screen = .gameOver}}}
+ func answer(_ n:Int){guard screen == .game else{return};if n==puzzle().answer{completed.insert("\(difficulty.rawValue)-\(level)");save();screen = .complete}else{lives=max(0,lives-1);message=lives==0 ? "Game Over" : "Try again.";save();if lives==0{screen = .gameOver}}}
  func retry(){start(difficulty,level)}
- func next(){guard level<20,canPlay(difficulty,level+1) else{return};start(difficulty,level+1)}
+ func next(){guard level<20,completed.contains("\(difficulty.rawValue)-\(level)") else{return};start(difficulty,level+1)}
  func hint(){guard hints>0 && hintStage<3 else{return};hints-=1;hintStage+=1;save()}
 }
 @main struct SequenceIQApp:App{var body:some Scene{WindowGroup{ContentView()}}}
