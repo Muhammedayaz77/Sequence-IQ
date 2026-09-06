@@ -1,0 +1,1 @@
+export const ComingSoonView = () => `<section id="comingScreen" class="screen coming-screen"><div class="coming-card"><div class="trophy">🏆</div><h2>Coming Soon!</h2><p>More exciting Sequence IQ features are on the way.</p><button data-action="home" class="wide-btn">HOME</button></div></section>`;
