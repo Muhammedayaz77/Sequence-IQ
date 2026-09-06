@@ -1,0 +1,1 @@
+export const DifficultyView = () => `<section id="difficultyScreen" class="screen"><div class="screen-top"><button data-action="home" class="back-btn">‹</button><div><span class="eyebrow">CHOOSE YOUR JOURNEY</span><h2>Choose Difficulty</h2></div><div></div></div><div id="difficultyCards" class="difficulty-cards"></div></section>`;
