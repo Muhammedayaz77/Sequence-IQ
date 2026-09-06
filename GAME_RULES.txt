@@ -7,7 +7,7 @@ STATUS: Finalized V1 specification
 
 ## 1. Source of Truth
 
-This file is the permanent project-rules record for Sequence IQ. Finalized decisions must be added here so future development can recover the project specification even when conversation context or assistant memory is unavailable.
+This file is the permanent project-rules record for Sequence IQ. Finalized decisions must be added here so future chats and development can recover the project specification even when conversation context or assistant memory is unavailable.
 
 Do not silently change a finalized rule. New changes must be explicitly approved and recorded.
 
@@ -200,7 +200,8 @@ Sequence-IQ/
 │   ├── backgrounds/
 │   ├── buttons/
 │   ├── icons/
-│   └── panels/
+│   ├── panels/
+│   └── mock-screens/
 ├── ios/
 │   └── Puzzles.txt
 ├── android/
@@ -211,7 +212,7 @@ Sequence-IQ/
 
 ## 18. Change Management
 
-Any newly finalized V1 rule, naming convention, gameplay decision, or architecture decision must be added to this file before being treated as part of the permanent specification.
+Any newly finalized V1 rule, naming convention, gameplay decision, architecture decision, or visual-design decision must be added to this file before being treated as part of the permanent specification.
 
 ## 19. Git Commit Standards
 
@@ -243,6 +244,57 @@ Sequence IQ must use a modern, attractive, polished game visual style rather tha
 
 The visual system should use purpose-built game graphics for backgrounds, level buttons, Play buttons, settings controls, completion/game-over screens, icons, panels, and other important game UI where appropriate.
 
-All reusable game graphics must be organized under the repository `assets/` directory and kept visually consistent across the three independent platform implementations. Platform-specific implementations may convert/adapt the assets to their native format, but must preserve the approved visual design.
+All reusable game graphics must be organized under the repository `assets/` directory and kept visually consistent across the three independent platform implementations. Platform-specific implementations may adapt the assets to their native format, but must preserve the approved visual design.
+
+## 22. Finalized Mock-Screen Source of Truth
+
+When a screen design/mockup is presented to the project owner and explicitly marked **FINAL**, that exact approved design becomes the visual source of truth for that screen.
+
+The finalized screen must be reproduced consistently in Web, iOS, and Android. It is compulsory to preserve the approved visual design rather than replacing it with an alternative interpretation.
+
+Once a screen is finalized, do not make unsolicited visual changes to it. Any change to a finalized screen requires explicit approval from the project owner and must be recorded before implementation.
+
+The approved **Sequence IQ V1 mock-screen set** supplied by the project owner is the final visual reference for the V1 screens until the owner explicitly approves a replacement version.
+
+## 23. Mock-Screen Asset Quality Rule
+
+Never crop individual production screen assets, backgrounds, buttons, icons, or UI elements out of a composite mock-screen sheet.
+
+Cropping a composite mockup can reduce image quality and is not an acceptable production-asset workflow.
+
+Production assets must be created or supplied as their own native/high-quality files. A composite mock-screen sheet may be stored only as a visual reference and comparison document.
+
+The mock-screen sheet itself must never be treated as a source from which production UI graphics are cropped.
+
+## 24. Image Generation / Editing Permission
+
+Do not generate, redraw, edit, or otherwise create new project images unless the project owner explicitly asks for image generation or image editing in that request.
+
+When a final mock-screen is already approved, implementing the application from that reference does not constitute permission to generate a different replacement design.
+
+## 25. Approved V1 Mock Screens
+
+The currently approved Sequence IQ V1 mock-screen set contains these twelve final reference screens:
+
+1. Splash Screen
+2. Home Screen
+3. Difficulty Select
+4. Level Map (Easy)
+5. Gameplay Screen
+6. Level Complete
+7. Game Over
+8. Settings
+9. Shop
+10. Achievements
+11. Stats
+12. Coming Soon
+
+The project owner may provide the approved mock-screen reference as an attached image. That attachment is the visual reference to compare against during implementation and verification.
+
+## 26. Final Design Integrity
+
+For any explicitly finalized screen, implementation is considered incorrect if it changes the approved design without authorization, even when the replacement is aesthetically improved by the developer.
+
+Visual fidelity to the approved final reference takes priority over developer-side redesign preferences.
 
 Version 1 is considered finalized as recorded above.
