@@ -1,9 +1,23 @@
 # Sequence IQ V1 Mock Screens
 
-These reference mock screens are kept in the repository so the approved visual design can be compared against the implementations.
+This folder is the visual reference area for comparing the implemented game against the approved mock direction.
 
-Approved reference direction:
-- `reference-image-1.jpeg` — approved Image 1 visual direction
-- `full-mockup-v1.png` — 12-screen V1 mockup reference
+## Approved direction
+The approved reference is the modern neon-fantasy mobile-game style: floating islands, waterfalls, glowing controls, a winding level path, completed level nodes, a highlighted/jumping current level, and polished result/settings/gameplay screens.
 
-Use these only as visual design references. Do not treat mock text, scores, timers, stars, shop currency, or V2-style features shown in the images as V1 gameplay rules unless separately approved in `GAME_RULES.txt`.
+## Reference sheet
+`mock-screen-index.svg` contains the V1 comparison sheet covering:
+1. Splash
+2. Home
+3. Difficulty Select
+4. Easy Level Map
+5. Gameplay
+6. Level Complete
+7. Game Over
+8. Settings
+9. Shop
+10. Achievements
+11. Stats
+12. Coming Soon
+
+Use this sheet as the visual comparison reference when reviewing future changes. If a screen needs a design change, describe the exact screen and desired difference so the implementation can be updated consistently across Web, iOS, and Android.
