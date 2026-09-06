@@ -1,0 +1,1 @@
+export const StatsView = () => `<section id="statsScreen" class="screen"><div class="screen-top"><button data-action="home" class="back-btn">‹</button><div><span class="eyebrow">PROGRESS</span><h2>Stats</h2></div><div></div></div><div id="statsCard" class="stats-card"></div></section>`;
