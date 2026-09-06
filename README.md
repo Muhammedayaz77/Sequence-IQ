@@ -127,7 +127,13 @@ The complete permanent project rules and finalized V1 decisions are maintained i
 
 **Version:** V1
 
-**Repository:** Private during development. The repository may be made public by the project owner when ready.
+**Repository:** Public development repository.
+
+## Web Game
+
+🎮 **Play Sequence IQ on the Web:**
+
+https://muhammedayaz77.github.io/Sequence-IQ/
 
 ---
 
