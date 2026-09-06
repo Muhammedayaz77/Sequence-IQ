@@ -1,0 +1,18 @@
+import SwiftUI
+
+struct Puzzle { let sequence:[Int?]; let answer:Int; let options:[Int] }
+enum Difficulty:String,CaseIterable { case easy="Easy",hard="Hard",master="Master" }
+final class GameModel:ObservableObject {
+ @Published var difficulty:Difficulty = .easy; @Published var level=1; @Published var lives=3; @Published var hints=3; @Published var completed:Set<String>=[]; @Published var hintStage=0
+ init(){if let d=UserDefaults.standard.data(forKey:"completed"),let s=try? JSONDecoder().decode(Set<String>.self,from:d){completed=s};let h=UserDefaults.standard.integer(forKey:"hints");if h>0{hints=h}}
+ func start(_ d:Difficulty,_ l:Int){difficulty=d;level=l;lives=3;hintStage=0}
+ func puzzle()->Puzzle{let a=level+1;switch difficulty{case .easy:return Puzzle(sequence:[a,a+2,a+4,a+6,nil,a+10],answer:a+8,options:[a+12,a+4,a+14,a+2]);case .hard:return Puzzle(sequence:[a,a*2,a*4,a*8,nil,a*32],answer:a*16,options:[a*12,a*24,a*32,a*8]);case .master:return Puzzle(sequence:[a,a+3,a+8,a+15,nil,a+35],answer:a+24,options:[a+31,a+21,a+36,a+24])}}
+ func complete(){completed.insert("\(difficulty.rawValue)-\(level)");if let d=try? JSONEncoder().encode(completed){UserDefaults.standard.set(d,forKey:"completed")}}
+ func hint(){guard hints>0 && hintStage<3 else{return};hints-=1;hintStage+=1;UserDefaults.standard.set(hints,forKey:"hints")}
+}
+@main struct SequenceIQApp:App{var body:some Scene{WindowGroup{ContentView()}}}
+struct ContentView:View{@StateObject var game=GameModel();@State var screen="home";var body:some View{NavigationStack{Group{if screen=="home"{Home(screen:$screen)}else if screen=="levels"{Levels(game:game,screen:$screen)}else{Game(game:game,screen:$screen)}}.navigationTitle("Sequence IQ")}}}
+struct Home:View{@Binding var screen:String;var body:some View{VStack(spacing:18){Text("HIND TECH GROUP").font(.caption.bold());Text("Sequence IQ").font(.largeTitle.bold());Text("A Number Series & Logic Puzzle Game").foregroundStyle(.secondary);Button("Open Play"){screen="levels"}.buttonStyle(.borderedProminent);Spacer();Text("V1 • 60 Levels").foregroundStyle(.secondary)}.padding()}}
+struct Levels:View{@ObservedObject var game:GameModel;@Binding var screen:String;var body:some View{ScrollView{VStack(alignment:.leading,spacing:24){ForEach(Difficulty.allCases,id:\.self){d in let open=d == .easy || (d == .hard && game.completed.filter{$0.hasPrefix("Easy-")}.count>=20) || (d == .master && game.completed.filter{$0.hasPrefix("Hard-")}.count>=20);Text(d.rawValue).font(.title2.bold());LazyVGrid(columns:Array(repeating:GridItem(.flexible()),count:4)){ForEach(1...20,id:\.self){i in Button("\(i)"){game.start(d,i);screen="game"}.disabled(!open).buttonStyle(.bordered)}}};Button("Home"){screen="home"}}.padding()}}}
+struct Game:View{@ObservedObject var game:GameModel;@Binding var screen:String;@State var message="";var body:some View{let p=game.puzzle();VStack(spacing:16){HStack{Button("Levels"){screen="levels"};Spacer();Text("♥".repeating(game.lives))};Text("\(game.difficulty.rawValue) • Level \(game.level)").font(.headline);HStack{ForEach(Array(p.sequence.enumerated()),id:\.offset){_,n in Text(n.map(String.init) ?? "?").frame(maxWidth:.infinity).padding().background(.thinMaterial).clipShape(RoundedRectangle(cornerRadius:10))}};ForEach(p.options,id:\.self){n in Button("\(n)"){if n==p.answer{game.complete();message="Correct!"}else{game.lives-=1;message=game.lives==0 ? "Game Over" : "Try again."}}.frame(maxWidth:.infinity).buttonStyle(.borderedProminent)};Button("Use Hint (\(game.hints))"){game.hint()}.disabled(game.hints==0 || game.hintStage==3);Text(message);Spacer()}.padding()}}
+extension String{func repeating(_ n:Int)->String{String(repeating:self,count:n)}}
