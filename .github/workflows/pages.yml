@@ -31,6 +31,9 @@ jobs:
         run: |
           test -f web/index.html
           test -f web/Puzzles.txt
+          test -d assets
+          rm -rf web/assets
+          cp -R assets web/assets
           cp web/index.html web/404.html
 
       - name: Upload Pages artifact
