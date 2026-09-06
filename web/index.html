@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sequence IQ</title>
+  <meta name="description" content="Sequence IQ — A Number Series & Logic Puzzle Game by Hind Tech Group.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">HIND TECH GROUP</p>
+        <h1>Sequence IQ</h1>
+        <p class="subtitle">A Number Series &amp; Logic Puzzle Game</p>
+      </div>
+      <button id="settingsButton" class="icon-button" aria-label="Open settings">⚙</button>
+    </header>
+
+    <section id="homeScreen" class="screen active">
+      <div class="hero-card">
+        <span class="badge">V1</span>
+        <h2>Train your pattern sense.</h2>
+        <p>Find the missing number, beat each level, and unlock harder sequences.</p>
+        <button id="openPlayButton" class="primary-button">Open Play</button>
+      </div>
+
+      <nav class="home-tabs" aria-label="Main navigation">
+        <button class="tab active" data-tab="play">▶ Play</button>
+        <button class="tab" data-tab="shop">◆ Shop</button>
+        <button class="tab" data-tab="coming">✦ Coming Soon</button>
+      </nav>
+
+      <div id="tabContent" class="tab-content"></div>
+    </section>
+
+    <section id="levelsScreen" class="screen">
+      <div class="section-heading">
+        <button id="backHomeButton" class="text-button">← Home</button>
+        <div>
+          <p class="eyebrow">LEVEL SELECT</p>
+          <h2>Choose your challenge</h2>
+        </div>
+      </div>
+      <div id="difficultyGroups"></div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <div class="game-header">
+        <button id="backLevelsButton" class="text-button">← Levels</button>
+        <span id="levelLabel">Easy · Level 1</span>
+        <span id="livesLabel" aria-label="Lives">♥♥♥</span>
+      </div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <article class="puzzle-card">
+        <p id="puzzleNumber" class="eyebrow">PUZZLE 01</p>
+        <h2>Find the missing number</h2>
+        <div id="sequence" class="sequence" aria-label="Number sequence"></div>
+        <p id="questionHint" class="question-hint">Choose the number that completes the pattern.</p>
+        <div id="options" class="options"></div>
+        <div class="hint-row">
+          <span id="hintBalance">Hints: 0</span>
+          <button id="hintButton" class="secondary-button">Use Hint</button>
+        </div>
+        <p id="feedback" class="feedback" role="status"></p>
+      </article>
+    </section>
+
+    <section id="gameOverScreen" class="screen centered">
+      <div class="result-card">
+        <span class="result-icon">×</span>
+        <p class="eyebrow">GAME OVER</p>
+        <h2>Keep going.</h2>
+        <p>You used all 3 lives. Try the sequence again.</p>
+        <button id="retryButton" class="primary-button">Retry Level</button>
+        <button id="resultLevelsButton" class="secondary-button">Level Select</button>
+        <button id="resultHomeButton" class="text-button">Home</button>
+      </div>
+    </section>
+
+    <section id="completeScreen" class="screen centered">
+      <div class="result-card">
+        <span class="result-icon">✓</span>
+        <p class="eyebrow">LEVEL COMPLETE</p>
+        <h2>Excellent work!</h2>
+        <p id="completeText">You found the correct sequence.</p>
+        <button id="nextLevelButton" class="primary-button">Next Level</button>
+        <button id="completeLevelsButton" class="secondary-button">Level Select</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="settingsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-card">
+      <div class="modal-header"><h2 id="settingsTitle">Settings</h2><button id="closeSettingsButton" class="icon-button">×</button></div>
+      <label class="setting"><span>Music</span><input id="musicToggle" type="checkbox" checked></label>
+      <label class="setting"><span>Sound</span><input id="soundToggle" type="checkbox" checked></label>
+      <p class="modal-note">Music and Sound are independent settings.</p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
