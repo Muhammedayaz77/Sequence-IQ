@@ -1,0 +1,1 @@
+export const AchievementsView = () => `<section id="achievementsScreen" class="screen"><div class="screen-top"><button data-action="home" class="back-btn">‹</button><div><span class="eyebrow">MILESTONES</span><h2>Achievements</h2></div><div></div></div><div id="achievementList" class="list-card"></div></section>`;
