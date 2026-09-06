@@ -1,0 +1,36 @@
+import { GameModel } from '../Model/GameModel.js';
+import { SplashView } from '../View/SplashView.js'; import { HomeView } from '../View/HomeView.js'; import { DifficultyView } from '../View/DifficultyView.js'; import { LevelMapView } from '../View/LevelMapView.js'; import { GameplayView } from '../View/GameplayView.js'; import { LevelCompleteView } from '../View/LevelCompleteView.js'; import { GameOverView } from '../View/GameOverView.js'; import { SettingsView } from '../View/SettingsView.js'; import { ShopView } from '../View/ShopView.js'; import { AchievementsView } from '../View/AchievementsView.js'; import { StatsView } from '../View/StatsView.js'; import { ComingSoonView } from '../View/ComingSoonView.js';
+
+export class AppController {
+  constructor(root) { this.root=root; this.model=new GameModel(); this.render(); }
+  render() {
+    this.root.innerHTML = `<div id="appShell"></div>`; const shell=this.root.querySelector('#appShell');
+    shell.innerHTML = [SplashView(), HomeView(), DifficultyView(), LevelMapView(), GameplayView(), LevelCompleteView(), GameOverView(), SettingsView(), ShopView(), AchievementsView(), StatsView(), ComingSoonView()].join('');
+    shell.insertAdjacentHTML('afterbegin', `<header id="topbar" class="topbar splash-hidden"><button data-action="home" class="round-btn">⌂</button><div class="brand"><span>HIND TECH GROUP</span><strong>SEQUENCE <b>IQ</b></strong></div><button data-action="settings" class="round-btn">⚙</button></header>`);
+    this.bind(); this.show('splashScreen');
+  }
+  show(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); const el=document.getElementById(id); if(el) el.classList.add('active'); window.scrollTo({top:0,behavior:'instant'}); }
+  bind() {
+    this.root.addEventListener('click', e => { const el=e.target.closest('[data-action]'); if(!el)return; this.action(el.dataset.action); });
+    this.root.addEventListener('click', e => { const b=e.target.closest('.option'); if(b && !b.disabled)this.choose(Number(b.dataset.value)); });
+    document.getElementById('musicToggle').onchange=e=>{this.model.music=e.target.checked;this.model.save()}; document.getElementById('soundToggle').onchange=e=>{this.model.sound=e.target.checked;this.model.save()};
+    setTimeout(()=>{this.show('homeScreen');document.getElementById('topbar').classList.remove('splash-hidden')},1500);
+  }
+  action(a) {
+    if(a==='home') return this.show('homeScreen'); if(a==='play'||a==='difficulty') return this.show('difficultyScreen'); if(a==='levels') return this.openLevels();
+    if(a==='settings'){document.getElementById('musicToggle').checked=this.model.music;document.getElementById('soundToggle').checked=this.model.sound;return this.show('settingsScreen')}
+    if(a==='shop')return this.show('shopScreen'); if(a==='coming')return this.show('comingScreen'); if(a==='restart'||a==='retry')return this.start(this.model.difficulty,this.model.level);
+    if(a==='hint')return this.hint(); if(a==='next')return this.start(this.model.difficulty,this.model.level+1); if(a==='skip'){document.getElementById('feedback').textContent='Complete this level to unlock the next level.';return;}
+    if(a==='dailyHint'){const r=this.model.claimDailyHint(); document.getElementById('shopHints').textContent=this.model.hints; alert(r==='offline'?'Internet connection required.':r==='claimed'?'Today’s free hint is already collected.':'Daily hint collected!');}
+  }
+  openLevels(){ this.renderDifficulty(); this.show('levelsScreen'); this.renderMap(); }
+  renderDifficulty(){ document.getElementById('difficultyScreen').querySelector('.screen-top h2').textContent='Choose Difficulty'; }
+  renderMap(){ const root=document.getElementById('levelMap'); document.getElementById('mapTitle').textContent=`${this.model.difficulty} Levels`;document.getElementById('mapHints').textContent=this.model.hints;root.innerHTML='';
+    for(let row=0;row<5;row++){const r=document.createElement('div');r.className='map-row '+(row%2?'reverse':'');const ids=row%2?[4*row+4,4*row+3,4*row+2,4*row+1]:[4*row+1,4*row+2,4*row+3,4*row+4];ids.forEach(i=>{const done=!!this.model.completed[this.model.key(this.model.difficulty,i)];const playable=this.model.canPlay(this.model.difficulty,i);const b=document.createElement('button');b.className=`level-node ${done?'completed ':''}${playable&&!done?'current ':''}${!playable?'locked':''}`;b.disabled=!playable;b.dataset.action='start';b.dataset.level=i;b.innerHTML=`<span class="node">${playable?i:'🔒'}</span><span class="level-stars">${done?'★ ★ ★':''}</span>${playable&&!done?'<span class="current-label">CURRENT</span>':''}`;r.appendChild(b)});root.appendChild(r)}
+    root.querySelectorAll('[data-action="start"]').forEach(b=>b.onclick=()=>this.start(this.model.difficulty,Number(b.dataset.level)));
+  }
+  start(d,l){if(!this.model.start(d,l))return;this.show('gameScreen');this.renderPuzzle();}
+  renderPuzzle(){const p=this.model.currentPuzzle();document.getElementById('levelLabel').textContent=`${this.model.difficulty} · Level ${this.model.level}`;document.getElementById('puzzleNumber').textContent=`PUZZLE ${String(this.model.level).padStart(2,'0')}`;document.getElementById('livesLabel').textContent='♥'.repeat(this.model.lives)+'♡'.repeat(3-this.model.lives);document.getElementById('progressBar').style.width=`${this.model.level/20*100}%`;document.getElementById('hintBadge').textContent=this.model.hints;document.getElementById('sequence').innerHTML=p.sequence.map(n=>`<span class="${n===null?'missing':''}">${n===null?'?':n}</span>`).join('');document.getElementById('options').innerHTML=p.options.map(n=>`<button class="option" data-value="${n}">${n}</button>`).join('');document.getElementById('hintButton').disabled=this.model.hints<=0||this.model.hintStage>=3;document.getElementById('feedback').textContent='';}
+  choose(v){const result=this.model.answer(v);if(result==='complete'){this.show('completeScreen');document.getElementById('completeText').textContent=`You cleared ${this.model.difficulty} Level ${this.model.level}.`;document.getElementById('nextLevelButton').style.display=this.model.level<20?'block':'none';}else if(result==='gameover'){this.show('gameOverScreen')}else{document.getElementById('livesLabel').textContent='♥'.repeat(this.model.lives)+'♡'.repeat(3-this.model.lives);document.getElementById('feedback').textContent='Not quite — try another option.';}}
+  hint(){if(!this.model.useHint())return;const p=this.model.currentPuzzle();const buttons=[...document.querySelectorAll('.option:not(.wrong):not(.removed)')];if(this.model.hintStage===1)buttons.filter(b=>Number(b.dataset.value)!==p.answer).slice(0,2).forEach(b=>b.classList.add('removed'));if(this.model.hintStage===2)[...document.querySelectorAll('.option:not(.removed)')].filter(b=>Number(b.dataset.value)!==p.answer).forEach(b=>b.classList.add('removed'));if(this.model.hintStage===3){document.querySelectorAll('.option').forEach(b=>{if(Number(b.dataset.value)===p.answer)b.classList.add('correct')});document.getElementById('feedback').textContent='Answer revealed.';}document.getElementById('hintBadge').textContent=this.model.hints;document.getElementById('hintButton').disabled=this.model.hints<=0||this.model.hintStage>=3;}
+}
