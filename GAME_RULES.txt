@@ -196,6 +196,11 @@ Ownership statement:
 Sequence-IQ/
 ├── GAME_RULES.txt
 ├── README.md
+├── assets/
+│   ├── backgrounds/
+│   ├── buttons/
+│   ├── icons/
+│   └── panels/
 ├── ios/
 │   └── Puzzles.txt
 ├── android/
@@ -217,5 +222,27 @@ Every Git commit must use a clear, professional, and meaningful **title** and **
 - Avoid vague commit messages such as `update`, `changes`, `fix`, `work`, or `done`.
 - Commit messages should make the project history understandable without opening the changed files.
 - The title and description must match the actual changes in that commit.
+
+## 20. Screen Verification Rule
+
+The player should not be expected to manually inspect every screen after every development change.
+
+Whenever any UI, graphic, layout, navigation, gameplay state, shared component, asset, or styling change is made:
+
+1. Identify every screen/page that can be affected by the change.
+2. Verify the change is correctly reflected on all affected screens.
+3. Verify that the change did not break navigation, layout, interaction, or visual consistency on those screens.
+4. For shared assets/components, verify every screen where the asset/component is used.
+5. A feature or UI change must not be marked complete until the affected-screen verification has been performed.
+
+This verification rule applies independently to iOS, Android, and Web.
+
+## 21. Game Visual Design Rule
+
+Sequence IQ must use a modern, attractive, polished game visual style rather than plain/default platform controls.
+
+The visual system should use purpose-built game graphics for backgrounds, level buttons, Play buttons, settings controls, completion/game-over screens, icons, panels, and other important game UI where appropriate.
+
+All reusable game graphics must be organized under the repository `assets/` directory and kept visually consistent across the three independent platform implementations. Platform-specific implementations may convert/adapt the assets to their native format, but must preserve the approved visual design.
 
 Version 1 is considered finalized as recorded above.
