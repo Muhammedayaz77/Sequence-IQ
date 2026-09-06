@@ -5,42 +5,230 @@ OWNER: Hind Tech Group (HTG)
 VERSION: V2
 STATUS: V2 bug-fix and flow-hardening phase
 
-## Finalized V1 Rules
-The original V1 rules remain in force unless explicitly changed below: three independent platforms (ios/, android/, web/); 60 levels (Easy 20, Hard 20, Master 20); completion-based difficulty unlock; visual level path with dotted progression; 4 options per puzzle; 3 lives; staged hints; Home/Shop/Play/Coming Soon; independent Music/Sound; Connect terminology; offline gameplay; online-only account/cloud/daily-hint functions; local progress; platform-owned Puzzles.txt; professional Git commits; affected-screen verification; and modern polished game visuals.
+## 1. Source of Truth
 
-## 1. FINAL Mock-Screen Source of Truth — Highest Priority
-The owner-approved Sequence IQ V1 composite mock screen is the permanent visual source of truth for the finalized screens in assets/mock-screens/SEQUENCE_IQ_V1_FINAL_REFERENCE.md.
+This file is the permanent project-rules record for Sequence IQ. Finalized decisions must be added here so future development can recover the project specification even when conversation context or assistant memory is unavailable.
 
-Final screens: Splash Screen, Home Screen, Difficulty Select, Level Map (Easy), Gameplay Screen, Level Complete, Game Over, Settings, Shop, Achievements, Stats, Coming Soon.
+Do not silently change a finalized rule. New changes must be explicitly approved and recorded.
 
-Once the owner explicitly finalizes a screen, its design is LOCKED. No redesign, substitution, reinterpretation, or unapproved visual change is allowed. This includes layout, spacing, graphics, background, buttons, icons, colors, typography, positioning, proportions and visual composition.
+## 2. Platform Independence
 
-## 2. Mock-Screen Asset Quality Rule
+The repository must contain three independent platform implementations:
+- ios/
+- android/
+- web/
+
+Each platform must deploy independently.
+
+There must be no cross-platform dependency, shared application runtime, or shared application code between iOS, Android, and Web.
+
+Each platform keeps its own `Puzzles.txt` file.
+
+## 3. V1 Level Structure
+
+V1 contains exactly 60 levels:
+- Easy: 20 levels
+- Hard: 20 levels
+- Master: 20 levels
+
+Each level contains one puzzle/number-series question.
+
+## 4. Difficulty Unlocking
+
+- Easy is available from the beginning.
+- Hard unlocks after Easy is completed.
+- Master unlocks after Hard is completed.
+- Completed levels can be replayed.
+- Level selection uses a visual progression path with completed levels connected by dotted lines.
+- The next level must not become playable until the previous level is completed.
+
+## 5. Puzzle Format
+
+Every puzzle has exactly 4 answer options:
+- 1 correct answer
+- 3 incorrect answers
+
+## 6. Lives
+
+- Default lives: 3.
+- Only a wrong answer reduces lives.
+- Hints never reduce lives.
+- After 3 wrong answers, the player reaches Game Over.
+- Game Over provides retry/level/home navigation.
+
+## 7. Hint System
+
+Hints are staged:
+- No hint: 4 options remain.
+- Hint 1: remove 2 wrong options, leaving 1 wrong + 1 correct.
+- Hint 2: remove the remaining wrong option.
+- Hint 3: reveal/show the final answer.
+
+Hints do not consume lives.
+
+## 8. Home Navigation
+
+The Home experience has 3 main areas:
+- Shop
+- Play
+- Coming Soon
+
+Shop includes one daily free hint, online-only and once per day.
+
+Play includes Open Play and level selection.
+
+Coming Soon is a placeholder for future releases/features.
+
+## 9. Settings
+
+Music and Sound are independent settings:
+- Music ON/OFF
+- Sound ON/OFF
+
+Changing one must not automatically change the other.
+
+## 10. Account Terminology
+
+Use the term **Connect**, not Login.
+
+V1 connection methods:
+- Connect with Facebook
+- Connect with Email
+
+Each connection method gives the player 5 free hints once. Reconnecting must not repeat the reward. Connected players have an account ID for progress/synchronization.
+
+## 11. Online / Offline Rules
+
+Gameplay must work offline.
+
+Offline functionality includes playing puzzles, local progress, unlocking/completing levels, settings and locally available hints.
+
+Online is required for account connection, cloud progress synchronization and daily free hint claim.
+
+## 12. Local Progress
+
+Local storage must retain unlocked levels, completed levels, hint state/balance as applicable, Music setting and Sound setting.
+
+## 13. Cloud Synchronization
+
+Connected accounts can synchronize player progress. Platform implementations remain independent.
+
+## 14. Puzzle Data Storage
+
+Puzzle content must remain in `.txt` files. Do not replace puzzle content with a database as the V1 puzzle-content source. Each platform maintains its own `Puzzles.txt`.
+
+## 15. V1 Future Boundary
+
+The following are NOT part of V1 unless separately approved:
+- Leaderboards
+- Multiplayer
+- Daily Challenge
+- Timed modes
+- Endless modes
+- Additional puzzle categories
+- Social sharing
+- Paid hint packs
+- Notifications
+
+A 3-star system is planned for V2 and is not part of V1.
+
+## 16. Branding
+
+Official game name: **Sequence IQ**
+
+Positioning: **A Number Series & Logic Puzzle Game**
+
+Ownership: **Sequence IQ is developed and owned by Hind Tech Group (HTG).**
+
+## 17. Repository Structure
+
+```text
+Sequence-IQ/
+├── GAME_RULES.txt
+├── README.md
+├── assets/
+│   ├── backgrounds/
+│   ├── buttons/
+│   ├── icons/
+│   ├── panels/
+│   └── mock-screens/
+├── ios/
+│   └── Puzzles.txt
+├── android/
+│   └── Puzzles.txt
+└── web/
+    └── Puzzles.txt
+```
+
+## 18. Change Management
+
+Any newly finalized V1/V2 rule, naming convention, gameplay decision, architecture decision or visual-design decision must be added to this file before being treated as permanent.
+
+## 19. Git Commit Standards
+
+Every Git commit must use a clear, professional and meaningful title and description. The title and description must match the actual changes. Avoid vague messages such as `update`, `changes`, `fix`, `work` or `done`.
+
+## 20. Screen Verification Rule
+
+Whenever any UI, graphic, layout, navigation, gameplay state, shared component, asset or styling change is made:
+1. Identify every affected screen/page.
+2. Verify the change on all affected screens.
+3. Verify navigation, layout, interaction and visual consistency.
+4. Verify shared assets/components on every screen where used.
+5. Do not mark complete until affected-screen verification has been performed.
+
+This applies independently to iOS, Android and Web.
+
+## 21. Game Visual Design Rule
+
+Sequence IQ must use a modern, attractive, polished game visual style rather than plain/default platform controls. Purpose-built game graphics should be used for backgrounds, level buttons, Play buttons, settings controls, completion/game-over screens, icons, panels and other important game UI. Reusable game graphics belong under `assets/`. Native format adaptation is allowed only when the approved visual design is preserved.
+
+## 22. FINAL Mock-Screen Rule — Highest Priority
+
+The owner-approved V1 composite mock screen is the permanent visual source of truth for the finalized screens listed in `assets/mock-screens/SEQUENCE_IQ_V1_FINAL_REFERENCE.md`:
+1. Splash Screen
+2. Home Screen
+3. Difficulty Select
+4. Level Map (Easy)
+5. Gameplay Screen
+6. Level Complete
+7. Game Over
+8. Settings
+9. Shop
+10. Achievements
+11. Stats
+12. Coming Soon
+
+Once the owner explicitly finalizes a screen, its design is LOCKED. No redesign, substitution, reinterpretation or unapproved visual change is allowed. This includes layout, spacing, graphics, background, buttons, icons, colors, typography, positioning, proportions and visual composition.
+
+## 23. Mock-Screen Asset Quality Rule
+
 NEVER crop production assets from a composite mock-screen. Cropping can reduce quality and create inaccurate assets. Production assets must be original/native/high-quality individual files. The composite mockup is for visual reference and comparison only.
 
-## 3. Image Generation Permission
-Do not generate, redraw, edit, or create project images unless the owner explicitly asks for image generation/editing in that request.
+## 24. Image Generation / Editing Permission
 
-## 4. Screen Verification
-For every UI, graphic, layout, navigation, gameplay state, shared component, asset or styling change: identify all affected screens; verify the change on every affected screen; verify navigation, layout, interaction and visual consistency; and verify shared assets/components everywhere used. Do not mark complete until affected-screen verification is performed. Applies independently to Web, iOS and Android.
+Do not generate, redraw, edit or create project images unless the owner explicitly asks for image generation/editing in that request.
 
-## 5. V2 Navigation and Flow
-Required flow: Splash/Loading → Home → Play → Level Selection → Main Game → Game Over/Retry OR Level Complete → Next Level → Main Game.
+## 25. V2 Navigation and Screen Flow
 
-Splash/loading must display for at least 1 second and no more than 3 seconds. Default target is about 1.5 seconds.
+Required flow:
 
-Home is a single active screen. Scrolling Home must NEVER reveal another screen underneath it. Only one primary screen may be visible at a time.
+**Splash/Loading → Home → Play → Level Selection → Main Game → Game Over/Retry OR Level Complete → Next Level → Main Game**
 
-Play opens Level Selection only. Selecting a playable level opens Main Game only. Three wrong answers open Game Over only. Retry starts the same level with 3 fresh lives. Correct answer opens Level Complete only. Next Level opens the next unlocked Main Game directly. A level cannot be skipped to bypass completion-based unlocking. Back/Home returns to the correct parent without hidden screens stacking.
+- Splash/loading must display for at least 1 second and no more than 3 seconds. Default target: approximately 1.5 seconds.
+- Home must be a single active screen. Scrolling Home must NEVER reveal another screen underneath it.
+- Play opens Level Selection only.
+- Selecting a playable level opens Main Game only.
+- Three wrong answers open Game Over only.
+- Retry starts the same level with 3 fresh lives.
+- Correct answer opens Level Complete only.
+- Next Level opens the next unlocked Main Game directly.
+- A level cannot be skipped to bypass completion-based unlocking.
+- Back/Home returns to the correct parent without hidden screens stacking.
+- Only one primary screen may be active/visible at a time.
 
-## 6. V2 Bug-Fix Scope
-V2 is a stabilization phase. Check major and minor issues including screen stacking/overflow, wrong navigation, invalid unlocks, repeated completion, lives reset, wrong-answer handling, hint-state errors, puzzle loading, persistence, broken controls, stale UI state and responsive layouts.
+## 26. V2 Bug-Fix Rule
 
-## 7. Platform Independence
-Web, iOS and Android remain separate implementations with no shared application runtime or cross-platform application code.
+V2 is a stabilization phase. Check major and minor issues including screen stacking/overflow, wrong navigation, invalid unlocks, repeated completion, incorrect lives reset, wrong-answer handling, hint-state errors, puzzle loading, persistence, broken controls, stale UI state and responsive layout problems.
 
-## 8. V2 Design Integrity
-The approved final mock design must remain visually identical across Web, iOS and Android. Technical adaptation is allowed only when it does not alter the approved design. Any visual change requires explicit owner approval and an updated final reference.
-
-## 9. Git Standards
-Every commit must have a professional, meaningful title and description matching the actual change. Avoid vague messages such as update, changes, fix, work or done.
+Do not claim a platform is fully runnable/buildable unless its actual project/build target has been verified.
