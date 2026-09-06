@@ -208,4 +208,14 @@ Sequence-IQ/
 
 Any newly finalized V1 rule, naming convention, gameplay decision, or architecture decision must be added to this file before being treated as part of the permanent specification.
 
+## 19. Git Commit Standards
+
+Every Git commit must use a clear, professional, and meaningful **title** and **description**.
+
+- The commit title must briefly and accurately describe the main change.
+- The commit description must explain what was changed and, when useful, why the change was made.
+- Avoid vague commit messages such as `update`, `changes`, `fix`, `work`, or `done`.
+- Commit messages should make the project history understandable without opening the changed files.
+- The title and description must match the actual changes in that commit.
+
 Version 1 is considered finalized as recorded above.
