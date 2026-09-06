@@ -1,21 +1,19 @@
-# Sequence IQ V1 Game Assets
+# Sequence IQ — Game Asset Library
 
-All reusable game graphics belong under this directory.
+This folder contains the reusable visual system for Sequence IQ V1.
 
-## Approved visual direction
-Image 1 supplied by the project owner is the primary visual reference for V1:
-- neon fantasy environment
-- floating islands / waterfalls / castle world
-- glossy rounded game controls
-- bright blue, green, purple and gold accents
-- glowing level nodes and progression path
-- current level has a strong highlighted/jumping treatment
+## Visual direction
+- Modern neon-fantasy mobile-game style
+- Bright, polished, high-contrast UI
+- Glowing game controls and progression nodes
+- Floating-island / waterfall / fantasy-world atmosphere
+- Consistent visual language across Web, iOS and Android
 
 ## Asset groups
-- backgrounds/ — screen/world backgrounds
-- buttons/ — Play, navigation and difficulty controls
-- icons/ — lives, hints, settings and game-state icons
-- panels/ — question/result/modal panels
-- mock-screens/ — visual reference screenshots/mockups for comparison
+- `backgrounds/` — screen backgrounds
+- `buttons/` — primary and navigation buttons
+- `icons/` — heart, star, settings, trophy and hint graphics
+- `panels/` — question and dialog surfaces
+- `mock-screens/` — visual references for the approved V1 screen flow
 
-The mockups are reference material only. V1 gameplay scope remains defined by GAME_RULES.txt.
+The approved visual reference is the source for future visual comparisons. Platform implementations may adapt asset formats for native rendering, but should preserve the approved design language.
