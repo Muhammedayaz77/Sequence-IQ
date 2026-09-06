@@ -1,0 +1,1 @@
+export const SplashView = () => `<section id="splashScreen" class="screen splash-screen active"><div class="hero-logo">🧠</div><div class="game-title">SEQUENCE<br><b>IQ</b></div><p class="tagline">Find the Pattern<br>Boost Your Brain</p><div class="loading"><span></span></div><small>Loading...</small></section>`;
