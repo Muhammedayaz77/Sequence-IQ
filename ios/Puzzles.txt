@@ -1,0 +1,32 @@
+# Sequence IQ Puzzle Content
+
+Each platform owns and maintains its own copy of this file.
+
+V1 content allocation:
+
+## Easy
+
+20 series (E01–E20)
+
+## Hard
+
+20 series (H01–H20)
+
+## Master
+
+20 series (M01–M20)
+
+## Content Format
+
+Each series will contain:
+
+- Series ID
+- Difficulty
+- Number sequence
+- Four answer options
+- Correct answer
+- Optional hint material for the three hint stages
+
+Puzzle content must remain plain text and must not depend on a database.
+
+Full V1 puzzle questions will be populated during the content-building phase.

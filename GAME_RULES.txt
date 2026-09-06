@@ -1,0 +1,211 @@
+# Sequence IQ — Permanent Project Rules
+
+PROJECT: Sequence IQ
+OWNER: Hind Tech Group (HTG)
+VERSION: V1
+STATUS: Finalized V1 specification
+
+## 1. Source of Truth
+
+This file is the permanent project-rules record for Sequence IQ. Finalized decisions must be added here so future development can recover the project specification even when conversation context or assistant memory is unavailable.
+
+Do not silently change a finalized rule. New changes must be explicitly approved and recorded.
+
+## 2. Platform Independence
+
+The repository must contain three independent platform implementations:
+
+- ios/
+- android/
+- web/
+
+Each platform must deploy independently.
+
+There must be no cross-platform dependency, shared application runtime, or shared application code between iOS, Android, and Web.
+
+Each platform keeps its own `Puzzles.txt` file.
+
+## 3. V1 Level Structure
+
+V1 contains exactly 60 levels:
+
+- Easy: 20 levels
+- Hard: 20 levels
+- Master: 20 levels
+
+Each level contains one puzzle/number-series question.
+
+## 4. Difficulty Unlocking
+
+- Easy is available from the beginning.
+- Hard unlocks after Easy is completed.
+- Master unlocks after Hard is completed.
+- Completed levels can be replayed.
+- Level selection uses a visual progression path with completed levels connected by dotted lines.
+
+## 5. Puzzle Format
+
+Every puzzle has exactly 4 answer options:
+
+- 1 correct answer
+- 3 incorrect answers
+
+## 6. Lives
+
+- Default lives: 3.
+- Only a wrong answer reduces lives.
+- Hints never reduce lives.
+- After 3 wrong answers, the player reaches Game Over.
+- Game Over provides retry/level/home navigation.
+
+## 7. Hint System
+
+Hints are staged and can progressively reduce the choices:
+
+- No hint: 4 options remain.
+- Hint 1: remove 2 wrong options, leaving 1 wrong + 1 correct.
+- Hint 2: remove the remaining wrong option, leaving only the correct option.
+- Hint 3: reveal/show the final answer.
+
+Hints do not consume lives.
+
+## 8. Home Navigation
+
+The Home experience has 3 main tabs/areas:
+
+- Shop
+- Play
+- Coming Soon
+
+### Shop
+
+Shop includes a daily free hint.
+
+The daily free hint can only be collected while online and only once per day.
+
+### Play
+
+Play includes:
+
+- Open Play
+- Level selection
+
+### Coming Soon
+
+Coming Soon is a placeholder area for future releases/features and does not add V1 gameplay scope.
+
+## 9. Settings
+
+Music and Sound are independent settings:
+
+- Music ON/OFF
+- Sound ON/OFF
+
+Changing one must not automatically change the other.
+
+## 10. Account Terminology
+
+Use the term **Connect**, not Login.
+
+V1 connection methods:
+
+- Connect with Facebook
+- Connect with Email
+
+Each connection method gives the player 5 free hints once.
+
+The reward must not be repeatedly claimable through disconnecting and reconnecting.
+
+Connected players have an account ID for progress/synchronization.
+
+## 11. Online / Offline Rules
+
+Gameplay must work offline.
+
+Offline functionality includes:
+
+- Playing puzzles
+- Local progress
+- Unlocking/completing levels
+- Settings
+- Locally available hints
+
+Online is required for:
+
+- Account connection
+- Cloud progress synchronization
+- Daily free hint claim
+
+## 12. Local Progress
+
+Local storage must retain the player's relevant V1 state, including:
+
+- Unlocked levels
+- Completed levels
+- Hint state/balance as applicable
+- Music setting
+- Sound setting
+
+## 13. Cloud Synchronization
+
+Connected accounts can synchronize player progress.
+
+Platform implementations remain independent even when they support the same account concept.
+
+## 14. Puzzle Data Storage
+
+Puzzle content must remain in `.txt` files.
+
+Do not replace puzzle content with a database as the V1 puzzle-content source.
+
+Each platform maintains its own `Puzzles.txt`.
+
+## 15. V1 Future Boundary
+
+The following are NOT part of V1 unless separately approved:
+
+- Leaderboards
+- Multiplayer
+- Daily Challenge
+- Timed modes
+- Endless modes
+- Additional puzzle categories
+- Social sharing
+- Paid hint packs
+- Notifications
+
+A 3-star system is planned for V2 and is not part of V1.
+
+## 16. Branding
+
+Official game name:
+
+**Sequence IQ**
+
+Positioning:
+
+**A Number Series & Logic Puzzle Game**
+
+Ownership statement:
+
+**Sequence IQ is developed and owned by Hind Tech Group (HTG).**
+
+## 17. Repository Structure
+
+```text
+Sequence-IQ/
+├── GAME_RULES.txt
+├── README.md
+├── ios/
+│   └── Puzzles.txt
+├── android/
+│   └── Puzzles.txt
+└── web/
+    └── Puzzles.txt
+```
+
+## 18. Change Management
+
+Any newly finalized V1 rule, naming convention, gameplay decision, or architecture decision must be added to this file before being treated as part of the permanent specification.
+
+Version 1 is considered finalized as recorded above.
