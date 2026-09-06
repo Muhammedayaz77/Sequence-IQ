@@ -5,61 +5,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#061c4b">
 <title>Sequence IQ</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 <div class="app">
-  <header class="topbar">
+  <section id="splashScreen" class="screen splash-screen active">
+    <div class="hero-logo">🧠</div>
+    <div class="game-title">SEQUENCE<br><b>IQ</b></div>
+    <p class="tagline">Find the Pattern<br>Boost Your Brain</p>
+    <div class="loading"><span></span></div>
+    <small>Loading...</small>
+  </section>
+  <header class="topbar splash-hidden" id="topbar">
     <button id="homeButton" class="round-btn" aria-label="Home">⌂</button>
     <div class="brand"><span>HIND TECH GROUP</span><strong>SEQUENCE <b>IQ</b></strong></div>
     <button id="settingsButton" class="round-btn" aria-label="Settings">⚙</button>
   </header>
-
   <main>
-    <section id="homeScreen" class="screen active hero-screen">
-      <div class="hero-logo">🧠</div>
-      <div class="game-title">SEQUENCE<br><b>IQ</b></div>
+    <section id="homeScreen" class="screen hero-screen">
+      <div class="hero-logo">🧠</div><div class="game-title">SEQUENCE<br><b>IQ</b></div>
       <p class="tagline">Find the Pattern<br>Boost Your Brain</p>
       <button id="openPlayButton" class="graphic-btn play-btn"><span>▶</span> PLAY</button>
-      <div class="home-actions">
-        <button class="small-card" data-tab="shop">🛒<strong>SHOP</strong></button>
-        <button class="small-card" data-tab="play">▥<strong>PLAY</strong></button>
-        <button class="small-card" data-tab="coming">✦<strong>SOON</strong></button>
-      </div>
+      <div class="home-actions"><button class="small-card" data-tab="shop">🛒<strong>SHOP</strong></button><button class="small-card" data-tab="play">▥<strong>PLAY</strong></button><button class="small-card" data-tab="coming">✦<strong>SOON</strong></button></div>
       <div class="quote-card">“Small Steps<br>Make a Sharper Mind”</div>
     </section>
-
-    <section id="levelsScreen" class="screen map-screen">
-      <div class="screen-top"><button id="backHomeButton" class="back-btn">‹</button><div><span class="eyebrow">CHOOSE YOUR JOURNEY</span><h2 id="mapTitle">Easy Levels</h2></div><div class="hint-pill">💡 <span id="mapHints">3</span></div></div>
-      <div id="difficultyPicker" class="difficulty-picker"></div>
-      <div id="levelMap" class="level-map"></div>
-    </section>
-
-    <section id="gameScreen" class="screen game-screen">
-      <div class="screen-top"><button id="backLevelsButton" class="back-btn">‹</button><div class="level-pill" id="levelLabel">Level 1</div><div class="lives" id="livesLabel">♥♥♥</div></div>
-      <div class="progress"><div id="progressBar"></div></div>
-      <div class="question-card">
-        <span class="eyebrow" id="puzzleNumber">PUZZLE 01</span>
-        <h2>Find the next number</h2>
-        <div id="sequence" class="sequence"></div>
-      </div>
-      <div id="options" class="options"></div>
-      <div class="game-tools"><button id="hintButton" class="tool-btn">💡<span>Hint</span><i id="hintBadge">3</i></button><button id="restartButton" class="tool-btn">↻<span>Restart</span></button><button id="skipButton" class="tool-btn">»<span>Skip</span></button></div>
-      <p id="feedback" class="feedback"></p>
-    </section>
-
-    <section id="completeScreen" class="screen result-screen">
-      <div class="result-card success"><div class="trophy">🏆</div><span class="eyebrow">LEVEL COMPLETE</span><h2>Excellent!</h2><div class="stars">★ ★ ★</div><p id="completeText">You solved the sequence.</p><button id="nextLevelButton" class="graphic-btn play-btn">NEXT LEVEL ›</button><button id="completeLevelsButton" class="wide-btn">LEVEL MAP</button><button id="completeHomeButton" class="link-btn">HOME</button></div>
-    </section>
-
-    <section id="gameOverScreen" class="screen result-screen">
-      <div class="result-card danger"><div class="trophy">💥</div><span class="eyebrow">GAME OVER</span><h2>Try Again!</h2><p>You used all 3 lives. The path is still waiting.</p><button id="retryButton" class="graphic-btn play-btn">↻ RETRY</button><button id="resultLevelsButton" class="wide-btn">LEVEL MAP</button><button id="resultHomeButton" class="link-btn">HOME</button></div>
-    </section>
+    <section id="levelsScreen" class="screen map-screen"><div class="screen-top"><button id="backHomeButton" class="back-btn">‹</button><div><span class="eyebrow">CHOOSE YOUR JOURNEY</span><h2 id="mapTitle">Easy Levels</h2></div><div class="hint-pill">💡 <span id="mapHints">3</span></div></div><div id="difficultyPicker" class="difficulty-picker"></div><div id="levelMap" class="level-map"></div></section>
+    <section id="gameScreen" class="screen game-screen"><div class="screen-top"><button id="backLevelsButton" class="back-btn">‹</button><div class="level-pill" id="levelLabel">Level 1</div><div class="lives" id="livesLabel">♥♥♥</div></div><div class="progress"><div id="progressBar"></div></div><div class="question-card"><span class="eyebrow" id="puzzleNumber">PUZZLE 01</span><h2>Find the next number</h2><div id="sequence" class="sequence"></div></div><div id="options" class="options"></div><div class="game-tools"><button id="hintButton" class="tool-btn">💡<span>Hint</span><i id="hintBadge">3</i></button><button id="restartButton" class="tool-btn">↻<span>Restart</span></button><button id="skipButton" class="tool-btn">»<span>Skip</span></button></div><p id="feedback" class="feedback"></p></section>
+    <section id="completeScreen" class="screen result-screen"><div class="result-card success"><div class="trophy">🏆</div><span class="eyebrow">LEVEL COMPLETE</span><h2>Excellent!</h2><div class="stars">★ ★ ★</div><p id="completeText">You solved the sequence.</p><button id="nextLevelButton" class="graphic-btn play-btn">NEXT LEVEL ›</button><button id="completeLevelsButton" class="wide-btn">LEVEL MAP</button><button id="completeHomeButton" class="link-btn">HOME</button></div></section>
+    <section id="gameOverScreen" class="screen result-screen"><div class="result-card danger"><div class="trophy">💥</div><span class="eyebrow">GAME OVER</span><h2>Try Again!</h2><p>You used all 3 lives. The path is still waiting.</p><button id="retryButton" class="graphic-btn play-btn">↻ RETRY</button><button id="resultLevelsButton" class="wide-btn">LEVEL MAP</button><button id="resultHomeButton" class="link-btn">HOME</button></div></section>
   </main>
-
   <div id="settingsModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2>⚙ Settings</h2><button id="closeSettingsButton" class="round-btn">×</button></div><label><span>🎵 Music</span><input id="musicToggle" type="checkbox" checked></label><label><span>🔊 Sound</span><input id="soundToggle" type="checkbox" checked></label><p>Music and Sound work independently.</p></div></div>
   <div id="infoModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h2 id="infoTitle">Shop</h2><button id="closeInfoButton" class="round-btn">×</button></div><p id="infoText"></p><button id="dailyHint" class="wide-btn">COLLECT DAILY HINT</button></div></div>
 </div>
-<script src="app.js"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
