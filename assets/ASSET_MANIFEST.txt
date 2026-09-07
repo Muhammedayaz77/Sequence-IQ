@@ -1,0 +1,16 @@
+SEQUENCE IQ — FINAL SCREEN ASSET PACKAGE
+
+Assets are stored once in /shared. Each screen folder contains a manifest of the assets used by that screen, preventing duplicate image copies.
+
+01_Splash: bg_splash.svg, brain.svg, logo.svg, loading_empty.svg, loading_fill.svg
+02_Home: bg_home.svg, logo.svg, btn_play.svg, btn_achievements.svg, btn_shop.svg, btn_stats.svg, btn_settings.svg, heart.svg
+03_Difficulty_Select: bg_home.svg, difficulty_easy.svg, difficulty_hard.svg, difficulty_master.svg, icon_lock.svg
+04_Level_Map: bg_home.svg, level_1_unlocked.svg, level_2_unlocked.svg, level_3_locked.svg, level_20_completed.svg, icon_lock.svg, star_filled.svg
+05_Gameplay: bg_game.svg, panel_card.svg, heart.svg, answer_24_normal.svg, answer_28_normal.svg, answer_32_correct.svg, answer_36_normal.svg, btn_hint.svg, icon_bulb.svg, icon_skip.svg
+06_Level_Complete: bg_complete.svg, banner_complete.svg, banner_welldone.svg, star_filled.svg, btn_next.svg, btn_home.svg, confetti.svg
+07_Game_Over: bg_popup.svg, heart_broken.svg, banner_gameover.svg, btn_retry.svg, btn_home.svg, icon_wrong.svg
+08_Settings: bg_popup.svg, icon_sound.svg, icon_music.svg, icon_gear.svg, icon_share.svg, icon_info.svg, btn_home.svg
+09_Shop: bg_popup.svg, icon_bulb.svg, icon_skip.svg, icon_coin.svg, icon_gift.svg, btn_home.svg, panel_card.svg
+10_Achievements: bg_popup.svg, medal_bronze.svg, medal_silver.svg, medal_gold.svg, star_filled.svg, icon_check.svg, btn_home.svg
+11_Stats: bg_popup.svg, icon_trophy.svg, icon_stats.svg, icon_coin.svg, heart.svg, star_filled.svg, btn_home.svg
+12_Coming_Soon: bg_home.svg, rocket.svg, btn_stay_tuned.svg, icon_info.svg, confetti.svg
