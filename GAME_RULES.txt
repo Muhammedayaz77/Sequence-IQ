@@ -312,3 +312,22 @@ V2 work must treat each of the 12 screens as an independently designed screen. D
 Each screen must have its own layout, UI hierarchy, navigation entry/exit behavior, and required state handling. Shared visual components may be reused, but screen-specific composition remains separate.
 
 Before a screen is marked complete, verify its standalone appearance and its transitions to/from every directly connected screen according to the V2 navigation flow.
+
+## 30. Screen-by-Screen Graphics Design & Asset Package Rule
+
+Sequence IQ has no separate graphics designer. The assistant is responsible for creating the visual graphics required for the project when the owner explicitly requests the mock-screen/storyboard and its graphics.
+
+The visual design process must be **screen-by-screen**:
+
+1. The assistant first creates a mock screen/storyboard for the specific screen being designed.
+2. The owner reviews the screen and can request changes to any part of it, including layout, graphics, colors, typography, buttons, icons, backgrounds, panels, spacing or other visual elements.
+3. The assistant must revise that screen strictly according to the owner's instructions until the owner explicitly approves/finalizes it.
+4. Once a screen is approved, that approved screen becomes the exact visual source of truth for implementation. No unapproved visual redesign or substitution is allowed later.
+5. For every approved screen, the assistant must also create/package a ZIP containing **all needful original/native, high-quality individual image assets required for that specific screen**, based on the approved mock screen. The package must be relative to that screen and must contain every required graphic asset, not merely a screenshot or cropped portion of the mock screen.
+6. If the owner later requests a change to a finalized screen, the screen must be revised according to the owner's exact instructions. The corresponding screen-specific asset ZIP must also be regenerated so that the screen design and its asset package remain synchronized.
+7. Assets must be original/native production assets wherever possible and must not be created by cropping graphics from the composite mock screen.
+8. The screen mockup and its asset ZIP are treated as a paired design package. Implementation of that screen must use the corresponding approved package as its visual reference.
+9. Each screen's asset package should clearly identify the screen and contain only the assets needed for that screen, while reusable assets may be documented/marked as shared when the same approved asset is intentionally reused.
+10. The same workflow applies independently to all approved Sequence IQ screens and platforms. Native adaptation/conversion for iOS, Android and Web is allowed only when the approved visual design is preserved.
+
+The purpose of this rule is to ensure that **every finalized screen has both (a) an approved visual design and (b) a matching production-quality graphics package ready for implementation**, without depending on a separate graphics designer.
