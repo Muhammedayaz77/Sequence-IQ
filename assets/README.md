@@ -4,7 +4,7 @@ This folder contains the reusable visual system and approved visual references f
 
 ## Final visual source of truth
 
-The project owner's explicitly finalized 12-screen mockup is the authoritative V1 visual reference until the owner explicitly approves a replacement.
+The project owner's current 12-screen mockup is now **FINAL and approved**. It is the authoritative visual reference until the owner explicitly requests a replacement or a change to a specific screen.
 
 Final screens:
 1. Splash Screen
@@ -20,11 +20,13 @@ Final screens:
 11. Stats
 12. Coming Soon
 
+See `FINAL_DESIGN_STATUS.md` and `FINAL_SCREEN_ASSET_MANIFEST.md` for the final design decision and screen-by-screen graphics mapping.
+
 ## Critical asset rule
 
 Never crop individual production assets from the composite mock-screen. Cropping reduces quality and is not an acceptable production workflow.
 
-Production backgrounds, buttons, icons, panels, and other graphics must exist as their own native/high-quality assets. The composite mock screen is for visual reference and comparison only.
+Production backgrounds, buttons, icons, panels, illustrations and other graphics must exist as their own native/high-quality assets. Reusable assets should be stored once and referenced by all screens that use them.
 
 ## Final-design rule
 
@@ -39,4 +41,6 @@ Web, iOS, and Android must reproduce the approved final design consistently whil
 - `panels/` — native reusable UI panels
 - `mock-screens/` — visual references and final-design documentation only
 
-Do not generate new project images unless the project owner explicitly requests image generation/editing. A visual implementation request is not permission to create an alternative replacement mockup.
+## Image-generation permission
+
+Do not generate new project images unless the project owner explicitly requests image generation/editing in that request. A code implementation, debugging, testing, repository maintenance, or design-integration request by itself is not permission to generate additional images.
