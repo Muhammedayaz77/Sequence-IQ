@@ -1,8 +1,8 @@
 # Sequence IQ V1 — Final Mock-Screen Reference
 
-**Status: FINAL**
+**Status: FINAL — Owner Approved**
 
-This folder records the project owner's approved V1 visual reference. The attached 12-screen mockup is the source of truth for the finalized screen designs.
+The current 12-screen Sequence IQ mockup approved by the project owner is the permanent visual source of truth for implementation until the owner explicitly requests a screen change.
 
 ## Final screens
 
@@ -19,10 +19,24 @@ This folder records the project owner's approved V1 visual reference. The attach
 11. Stats
 12. Coming Soon
 
+## Approved visual direction
+
+The finalized direction is a modern, polished puzzle-game UI with deep blue/neon backgrounds, glossy rounded controls and panels, bright green primary actions, blue secondary controls, gold rewards/stars, distinct difficulty treatments, purpose-built game icons, and decorative game effects.
+
 ## Required implementation behavior
 
 - Reproduce the approved design consistently across Web, iOS, and Android.
-- Do not crop production assets out of this composite mock-screen.
+- Do not crop production assets out of the composite mock-screen.
+- Use individual/native high-quality production assets for implementation.
+- Reusable assets are shared and must not be duplicated unnecessarily.
 - Do not redesign or substitute finalized screens without explicit owner approval.
-- Any future visual change requires explicit approval and an updated final reference.
-- The composite image is for visual comparison/reference only; production assets must be native/high-quality files.
+- If the owner requests a change to one screen, revise only according to those instructions and update that screen's corresponding asset package.
+- Verify every affected screen after a visual or shared-asset change.
+
+## Asset mapping
+
+See `assets/FINAL_SCREEN_ASSET_MANIFEST.md` for the screen-by-screen graphics requirements.
+
+## Image-generation permission
+
+Do not generate, redraw, replace, or create project images unless the owner explicitly requests image generation/editing. Code implementation, debugging, testing, or repository maintenance alone does not authorize new image generation.
