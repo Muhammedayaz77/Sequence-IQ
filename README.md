@@ -45,6 +45,28 @@ Each puzzle supports staged hints:
 2. **Hint 2:** removes the remaining incorrect option, leaving only the correct answer.
 3. **Hint 3:** reveals the final answer.
 
+## Final Visual Design
+
+**Status: FINAL — Owner Approved**
+
+The current 12-screen mockup and its corresponding screen-by-screen graphics specification are now the approved visual source of truth for implementation.
+
+Final screens:
+1. Splash Screen
+2. Home Screen
+3. Difficulty Select
+4. Level Map (Easy)
+5. Gameplay Screen
+6. Level Complete
+7. Game Over
+8. Settings
+9. Shop
+10. Achievements
+11. Stats
+12. Coming Soon
+
+See `assets/FINAL_DESIGN_STATUS.md` and `assets/FINAL_SCREEN_ASSET_MANIFEST.md` for the finalized visual rules and graphics mapping.
+
 ## Home Experience
 
 The main home experience contains three areas:
@@ -105,12 +127,10 @@ The repository is organized into three independent platform implementations:
 Sequence-IQ/
 ├── GAME_RULES.txt
 ├── README.md
+├── assets/
 ├── ios/
-│   └── Puzzles.txt
 ├── android/
-│   └── Puzzles.txt
 └── web/
-    └── Puzzles.txt
 ```
 
 The platforms must not depend on a shared cross-platform runtime or shared application code. Each platform is developed and deployed independently.
@@ -121,11 +141,13 @@ V1 intentionally focuses on the core number-series puzzle experience. Features s
 
 ## Project Rules
 
-The complete permanent project rules and finalized V1 decisions are maintained in [`GAME_RULES.txt`](GAME_RULES.txt). That file is the source of truth for future development and project continuity.
+The complete permanent project rules and finalized V1/V2 decisions are maintained in [`GAME_RULES.txt`](GAME_RULES.txt). That file is the source of truth for future development and project continuity.
 
 ## Status
 
-**Version:** V1
+**Version:** V1 / V2 stabilization
+
+**Visual Design:** FINAL — Owner Approved
 
 **Repository:** Public development repository.
 
