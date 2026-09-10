@@ -8,154 +8,61 @@ Sequence IQ is a puzzle game built around number-series challenges, pattern reco
 
 **Sequence IQ is developed and owned by Hind Tech Group (HTG).**
 
-This repository contains the source and project assets for the Sequence IQ game. The project is being developed with independent implementations for iOS, Android, and Web.
+This repository contains independent native implementations for **iOS, Android, Windows, and Web**.
 
 ## V1 Overview
 
-Version 1 includes three difficulty groups:
+- Easy — 20 levels
+- Hard — 20 levels
+- Master — 20 levels
+- Total — 60 levels
+- Every level has 4 answer options: 1 correct + 3 incorrect.
 
-- **Easy** — 20 levels
-- **Hard** — 20 levels
-- **Master** — 20 levels
-
-That gives V1 a total of **60 levels**.
-
-Each level contains one number-series puzzle with four answer options: one correct answer and three incorrect answers.
-
-### Progression
+## Progression
 
 - Easy is available from the beginning.
-- Hard unlocks after completing Easy.
-- Master unlocks after completing Hard.
+- Hard unlocks after all 20 Easy levels are completed.
+- Master unlocks after all 20 Hard levels are completed.
+- Levels must be completed sequentially.
 - Completed levels remain available for replay.
-- Level selection uses a visual progression path.
 
-### Lives
+## Lives & Hints
 
-- Players start with **3 lives**.
-- Only an incorrect answer consumes a life.
-- Hints do not consume lives.
-- The game ends after the third incorrect answer.
-
-### Hint System
-
-Each puzzle supports staged hints:
-
-1. **Hint 1:** removes two incorrect options, leaving one incorrect and one correct option.
-2. **Hint 2:** removes the remaining incorrect option, leaving only the correct answer.
-3. **Hint 3:** reveals the final answer.
+Players start with 3 lives. Only an incorrect answer consumes a life. Three incorrect answers cause Game Over. Hints do not consume lives and use the staged Hint 1 → Hint 2 → Hint 3 system defined in `GAME_RULES.txt`.
 
 ## Final Visual Design
 
-**Status: FINAL — Owner Approved**
-
-The current 12-screen mockup and its corresponding screen-by-screen graphics specification are now the approved visual source of truth for implementation.
-
-Final screens:
-1. Splash Screen
-2. Home Screen
-3. Difficulty Select
-4. Level Map (Easy)
-5. Gameplay Screen
-6. Level Complete
-7. Game Over
-8. Settings
-9. Shop
-10. Achievements
-11. Stats
-12. Coming Soon
-
-See `assets/FINAL_DESIGN_STATUS.md` and `assets/FINAL_SCREEN_ASSET_MANIFEST.md` for the finalized visual rules and graphics mapping.
-
-## Home Experience
-
-The main home experience contains three areas:
-
-- **Shop** — includes a daily free hint that can be collected once per day while online.
-- **Play** — provides Open Play and level selection.
-- **Coming Soon** — reserved for future content and features.
-
-## Account & Connection
-
-Sequence IQ uses **Connect** terminology rather than Login.
-
-Supported connection methods in V1:
-
-- Connect with Facebook
-- Connect with Email
-
-Each connection method provides **5 free hints once**. Disconnecting and reconnecting does not allow the reward to be claimed repeatedly.
-
-Connected players have an account ID that can be used for progress synchronization.
-
-## Online & Offline Support
-
-Sequence IQ is designed to remain playable without an internet connection.
-
-**Offline:**
-
-- Puzzle gameplay
-- Local progress
-- Level unlocking and completion
-- Settings
-- Locally available hints
-
-**Online required:**
-
-- Account connection
-- Cloud progress synchronization
-- Daily free hint claim
-
-## Settings
-
-Music and Sound are controlled independently:
-
-- Music ON/OFF
-- Sound ON/OFF
+**FINAL — Owner Approved.** The 12 approved screens and their graphics rules remain the visual source of truth. See `assets/FINAL_DESIGN_STATUS.md`.
 
 ## Puzzle Content
 
-Puzzle content is stored in `.txt` files and is intentionally kept outside of a database.
+Puzzle content remains in independent `Puzzles.txt` files. Native iOS, Android and Windows implementations now load their local platform puzzle data rather than generating replacement puzzle content at runtime.
 
-Each platform maintains its own puzzle file so that iOS, Android, and Web implementations remain independent.
-
-## Platform Architecture
-
-The repository is organized into three independent platform implementations:
+## Platform Structure
 
 ```text
 Sequence-IQ/
 ├── GAME_RULES.txt
-├── README.md
 ├── assets/
-├── ios/
-├── android/
-└── web/
+├── ios/       # Native SwiftUI / Xcode
+├── android/   # Native Kotlin / Android
+├── windows/   # Native C# / WPF (.NET 8)
+└── web/       # Independent Web implementation
 ```
 
-The platforms must not depend on a shared cross-platform runtime or shared application code. Each platform is developed and deployed independently.
+Each platform deploys independently and has its own application code and puzzle data. No cross-platform runtime is used.
 
-## V1 Scope
+## Windows
 
-V1 intentionally focuses on the core number-series puzzle experience. Features such as leaderboards, multiplayer, daily challenges, timed modes, endless modes, additional puzzle categories, social sharing, paid hint packs, notifications, and the V2 three-star system are outside the V1 scope unless separately approved.
+Windows is implemented as a native **WPF + .NET 8** desktop application under `windows/`. It follows the same View / Controller / Model / Helper separation and implements the same Sequence IQ gameplay and 12-screen navigation model.
 
-## Project Rules
-
-The complete permanent project rules and finalized V1/V2 decisions are maintained in [`GAME_RULES.txt`](GAME_RULES.txt). That file is the source of truth for future development and project continuity.
+A GitHub Actions workflow at `.github/workflows/windows-build.yml` builds the Windows project on `windows-latest`.
 
 ## Status
 
-**Version:** V1 / V2 stabilization
+**Version:** V2 stabilization / native platform development
 
 **Visual Design:** FINAL — Owner Approved
-
-**Repository:** Public development repository.
-
-## Web Game
-
-🎮 **Play Sequence IQ on the Web:**
-
-https://muhammedayaz77.github.io/Sequence-IQ/
 
 ---
 
