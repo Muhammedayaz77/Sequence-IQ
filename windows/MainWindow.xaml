@@ -1,0 +1,1 @@
+<Window x:Class="SequenceIQ.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Sequence IQ" Width="1100" Height="760" MinWidth="850" MinHeight="650" WindowStartupLocation="CenterScreen" Background="#07152F"><Grid><Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/></Grid></Window>
