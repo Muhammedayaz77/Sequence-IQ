@@ -12,8 +12,8 @@ jobs:
       run:
         working-directory: android
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -28,5 +28,5 @@ jobs:
       run:
         working-directory: ios
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: xcodebuild -project "SequenceIQ.xcodeproj" -scheme "Sequence IQ" -sdk iphonesimulator -configuration Debug CODE_SIGNING_ALLOWED=NO build
