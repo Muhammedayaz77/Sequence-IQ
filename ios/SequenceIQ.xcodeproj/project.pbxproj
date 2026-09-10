@@ -5,10 +5,10 @@
  objectVersion = 56;
  objects = {
   111111111111111111111111 /* SequenceIQApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceIQApp.swift; sourceTree = "<group>";};
-  222222222222222222222222 /* GameModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModels.swift; sourceTree = "<group>";};
-  333333333333333333333333 /* NavigationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViews.swift; sourceTree = "<group>";};
-  444444444444444444444444 /* GameplayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayViews.swift; sourceTree = "<group>";};
-  555555555555555555555555 /* SecondaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryViews.swift; sourceTree = "<group>";};
+  222222222222222222222222 /* GameModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model/GameModels.swift; sourceTree = "<group>";};
+  333333333333333333333333 /* NavigationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View/NavigationViews.swift; sourceTree = "<group>";};
+  444444444444444444444444 /* GameplayViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View/GameplayViews.swift; sourceTree = "<group>";};
+  555555555555555555555555 /* SecondaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View/SecondaryViews.swift; sourceTree = "<group>";};
   666666666666666666666666 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>";};
   777777777777777777777777 /* SequenceIQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sequence IQ.app"; sourceTree = BUILT_PRODUCTS_DIR;};
   A111111111111111111111111 = {isa = PBXBuildFile; fileRef = 111111111111111111111111;};
