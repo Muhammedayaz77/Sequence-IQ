@@ -6,5 +6,6 @@ android { namespace = "com.hindtechgroup.sequenceiq"; compileSdk = 36
 
 kotlin { jvmToolchain(17) }
 
-android.sourceSets["main"].java.srcDirs("..", "../View", "../Controller", "../Model", "../Helper")
+android.sourceSets["main"].java.srcDirs("..")
 
+dependencies { implementation("androidx.appcompat:appcompat:1.7.1") }
