@@ -1,3 +1,5 @@
+using SequenceIQ.Helper;
+
 namespace SequenceIQ.Model;
 
 public enum Difficulty { Easy, Hard, Master }
@@ -15,13 +17,11 @@ public sealed class GameModel {
     public HashSet<string> Completed { get; } = [];
     public int Attempts { get; private set; }
     public int CorrectAnswers { get; private set; }
-
     public bool Open(Difficulty d) => d == Difficulty.Easy || (d == Difficulty.Hard && CompletedCount(Difficulty.Easy) == 20) || (d == Difficulty.Master && CompletedCount(Difficulty.Hard) == 20);
     public bool CanPlay(Difficulty d, int l) => Open(d) && l is >= 1 and <= 20 && (l == 1 || Completed.Contains(Key(d, l - 1)));
     public int CompletedCount(Difficulty d) => Completed.Count(x => x.StartsWith($"{d}-", StringComparison.Ordinal));
     public bool IsCompleted(Difficulty d, int l) => Completed.Contains(Key(d,l));
     private static string Key(Difficulty d, int l) => $"{d}-{l}";
-
     public Puzzle GetPuzzle() => PuzzleRepository.Get(Difficulty, Level);
     public void Start(Difficulty d, int l) { if (!CanPlay(d,l)) return; Difficulty=d; Level=l; Lives=3; HintStage=0; Message=""; Screen=Screen.Game; }
     public void Answer(int value) { if (Screen != Screen.Game) return; Attempts++; if (value == GetPuzzle().Answer) { CorrectAnswers++; Completed.Add(Key(Difficulty,Level)); Screen=Screen.Complete; } else { Lives--; Message=Lives==0 ? "Game Over" : "Try again."; if (Lives==0) Screen=Screen.GameOver; } }
